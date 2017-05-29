@@ -31,14 +31,39 @@ var EmployeeView = function(employee) {
             app.showAlert("Contacts API not supported", "Error");
             return;
         }
+        // var contact = navigator.contacts.create();
+        // contact.name = {givenName: employee.firstName, familyName: employee.lastName};
+        // var phoneNumbers = [];
+        // phoneNumbers[0] = new ContactField('work', employee.officePhone, false);
+        // phoneNumbers[1] = new ContactField('mobile', employee.cellPhone, true); // preferred number
+        // contact.phoneNumbers = phoneNumbers;
+        // contact.save();
+        // return false;
+
+
+        function onSuccess(contact) {
+            alert("Save Success");
+        };
+
+        function onError(contactError) {
+            alert("Error = " + contactError.code);
+        };
+
+        // create a new contact object
         var contact = navigator.contacts.create();
-        contact.name = {givenName: employee.firstName, familyName: employee.lastName};
-        var phoneNumbers = [];
-        phoneNumbers[0] = new ContactField('work', employee.officePhone, false);
-        phoneNumbers[1] = new ContactField('mobile', employee.cellPhone, true); // preferred number
-        contact.phoneNumbers = phoneNumbers;
-        contact.save();
+        contact.displayName = "Plumber";
+        contact.nickname = "Plumber";            // specify both to support all devices
+
+        // populate some fields
+        var name = new ContactName();
+        name.givenName = "Jane";
+        name.familyName = "Doe";
+        contact.name = name;
+
+        // save to device
+        contact.save(onSuccess,onError);
         return false;
+
     },
 
     this.changePicture = function(event) {
