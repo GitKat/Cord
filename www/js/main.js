@@ -30,15 +30,24 @@ var app = {
         $(window).on('hashchange', $.proxy(this.route, this));
     },
 
+
+
     route: function() {
       var self = this;
       var hash = window.location.hash;
       if (!hash) {
           if (this.homePage) {
-              this.slidePage(this.homePage);
+              // this.slidePage(this.homePage);
+              // location.reload();
+                this.homePage = new HomeView(this.store).render();
+                this.slidePage(this.homePage);
+
+
           } else {
               this.homePage = new HomeView(this.store).render();
+
               this.slidePage(this.homePage);
+
           }
           return;
       }

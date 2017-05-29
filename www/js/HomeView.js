@@ -14,8 +14,8 @@ var HomeView = function(store) {
       };
 
       this.findByName = function() {
-        store.findByName($('.search-key').val(), function(employees) {
-        $('.employee-list').html(HomeView.liTemplate(employees));
+        store.findByName($('.search-key').val(), function(employee) {
+        $('.employee-list').html(HomeView.liTemplate(employee));
         if (self.iscroll) {
             console.log('Refresh iScroll');
             self.iscroll.refresh();
